@@ -21,6 +21,7 @@ import SearchPage from "./pages/SearchPage";
 import LibraryPage from "./pages/LibraryPage";
 import LikedSongsPage from "./pages/LikedSongsPage";
 import CreatePlaylistPage from "./pages/CreatePlaylistPage";
+import PlaylistViewPage from "./pages/PlaylistViewPage";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/library" element={<LibraryPage />} />
             <Route path="/liked" element={<LikedSongsPage />} />
             <Route path="/create-playlist" element={<CreatePlaylistPage />} />
+            <Route path="/playlist/:id" element={<PlaylistViewPage />} />
           </Route>
           
           {/* 404 Route */}

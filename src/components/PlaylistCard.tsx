@@ -3,6 +3,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { MoreHorizontal, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface PlaylistCardProps {
   id: string;
@@ -23,8 +24,28 @@ const PlaylistCard = ({
   onPlay,
   onMenu,
 }: PlaylistCardProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/playlist/${id}`);
+  };
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onPlay) {
+      onPlay();
+    }
+  };
+
+  const handleMenuClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onMenu) {
+      onMenu();
+    }
+  };
+
   return (
-    <Card className="music-card group">
+    <Card className="music-card group cursor-pointer" onClick={handleCardClick}>
       <div className="relative aspect-square overflow-hidden">
         <img
           src={coverUrl}
@@ -36,7 +57,7 @@ const PlaylistCard = ({
             size="icon"
             variant="secondary"
             className="rounded-full bg-primary hover:bg-primary/90 text-white"
-            onClick={onPlay}
+            onClick={handlePlayClick}
           >
             <Play fill="currentColor" size={16} />
           </Button>
@@ -54,7 +75,7 @@ const PlaylistCard = ({
             variant="ghost"
             size="icon"
             className="h-8 w-8 text-muted-foreground hover:text-primary"
-            onClick={onMenu}
+            onClick={handleMenuClick}
           >
             <MoreHorizontal size={16} />
           </Button>
